@@ -1,0 +1,44 @@
+{
+  "name": "console.ident",
+  "version": "1.0.0",
+  "description": "The missing logging function for modern Javascript, v => ( console.log( v ), v )",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easilyBaffled/console.ident.git"
+  },
+  "keywords": [
+    "logging"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/easilyBaffled/console.ident/issues"
+  },
+  "homepage": "https://github.com/easilyBaffled/console.ident#readme",
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ],
+      [
+        "@pika/plugin-build-types"
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@pika/plugin-build-node": "^0.3.14",
+    "@pika/plugin-build-types": "^0.3.14",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-standard-pkg": "^0.3.14"
+  }
+}

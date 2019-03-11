@@ -1,6 +1,6 @@
 {
   "name": "console.ident",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The missing logging function for modern Javascript, v => ( console.log( v ), v )",
   "main": "src/index.js",
   "scripts": {

@@ -50,10 +50,10 @@ export const logIdent = (
     return v;
 };
 
-export default {
-    ident: logIdent,
-    ...console // In case you don't want to use the polyfill form, but want all of the logging function as one object
-};
+export default Object.assign(
+    { ident: logIdent },
+    console // In case you don't want to use the polyfill form, but want all of the logging function as one object
+);
 
 export const ident = logIdent;
 

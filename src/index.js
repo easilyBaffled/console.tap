@@ -5,8 +5,9 @@
  * @typedef {Object} IdentOptions
  * @property {string} [label] - a string to proceed the value being logged
  * @property {boolean} [lineNumber] - a boolean indicating of the label should include the line number `ident` was called on
- * @property {boolean} [fileName] - a boolean indicating of the label should include the name of the file `ident` was called in
  */
+
+//  * @property {boolean} [fileName] - a boolean indicating of the label should include the name of the file `ident` was called in
 
 /**
  * This function uses Error().stack to pull the place to get the line number `logIdent` was called on
@@ -54,8 +55,6 @@ export default Object.assign(
     { ident: logIdent },
     console // In case you don't want to use the polyfill form, but want all of the logging function as one object
 );
-
-export const ident = logIdent;
 
 /**
  * Ad the `ident` logging function to the global `console` object.

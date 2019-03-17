@@ -1,4 +1,18 @@
-# Console.ident/logIdent
+<h1 align=“center” style=“border-bottom: none;”>
+  console.ident/logIdent
+</h1>
+<p align=“center”>
+    <img alt="consoleident" src="assets/logo.svg" width="144">
+</p>
+<p align=“center”>
+<a href="https://nodei.co/npm/console.ident/"><img src="https://nodei.co/npm/console.ident.png"></a>
+</p>
+
+<p align=“center”>
+  The console function Modern Javascript has been missing
+</p>
+
+---
 
 ```js
 v => (console.log(v), v);

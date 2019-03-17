@@ -1,6 +1,6 @@
-<h1 align=“center” style=“border-bottom: none;”>
+<h2 align=“center” style=“border-bottom: none;”>
   console.ident/logIdent
-</h1>
+</h2>
 <p align=“center”>
     <img alt="consoleident" src="assets/logo.svg" width="144">
 </p>

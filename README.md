@@ -1,22 +1,21 @@
-<h2 align="center">
-    console.ident/logIdent
-</h2>
 <p align="center">
-    <a href="https://nodei.co/npm/console.ident/">
-        <img src="https://nodei.co/npm/console.ident.png" />
-    </a>
+    <img
+        alt="consoleident"
+        src="assets/logo.svg"
+        width="150px"
+    />
 </p>
-
+<h3 align="center">
+    console.ident/logIdent
+</h3>
 <p align="center">
     The console function Modern Javascript has been
     missing
 </p>
 <p align="center">
-    <img
-        alt="consoleident"
-        src="assets/logo.svg"
-        width="200px"
-    />
+    <a href="https://nodei.co/npm/console.ident/">
+        <img src="https://nodei.co/npm/console.ident.png" />
+    </a>
 </p>
 
 ```js

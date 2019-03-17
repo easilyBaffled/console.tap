@@ -4,10 +4,13 @@
 v => (console.log(v), v);
 ```
 
-`logIndent` is a function that takes in a value, logs the value, then returns the value. With the purpose of providing a logging function that does not interrupt your existing code
+`logIndent` provides a logging function that does not interrupt your existing code. The function takes in a value, logs the value, then returns the value. 
 
-This module provides a polyfill option - that will add `logIndent` to the global `console` object as `console.ident` - in addition to the `logIndent` function to use as a standalone function.
+In addition to the standalone `logIndent`, this module provides a polyfill that adds `logIndent` to the global `console` object as `console.ident`.  
+
 I believe that `logIndent` **should** be a part of the standard, and as such I will be referring to it as `console.ident` going forward.
+
+You can click [here to jump to the API](#API)
 
 You can view the slides and notes for my lighting talk proposing `console.ident` at [Ident Presentation](https://ident-presentation-qalclei0w.now.sh/?mode=presenter#0)
 
@@ -39,9 +42,9 @@ const result = arr
   .reduce(average);
 ```
 
-But there is no `console` function that fit in modern style Javascript. Instead `console.log` and it's like return `undefined`. Which means you will have to awkwardly break up the code to debug it. `console.ident` Solves the `undefined` issue. It takes in a value, logs the value, then returns the value.
+But there is no `console` function that fit in modern style Javascript. Instead `console.log` and it's like return `undefined`. Which means you will have to awkwardly break up the code to debug it. `console.ident` solves the `undefined` issue. It takes in a value, logs the value, then returns the value.
 
-**For Comparison:**
+**For comparison:**
 
 **With `console.log`:**
 
@@ -67,10 +70,12 @@ const user = JSON.parse(
 ```js
 const pickAndFormatData = ({ date, amount }) => {
   console.log(amount, Number(amount));
+  
   const result = {
     date: moment(date).format("DD/MM/YYY "),
     amount: Number(amount) ? formatCurrency(amount) : amount
   };
+  
   console.log(result);
   return result;
 };
@@ -102,8 +107,9 @@ const result = filtered.reduce(average);
 **With `console.ident`:**
 
 ```js
-const result = console
-  .ident(arr.map(parseNumbers).filter(removeOdds))
+const result = console.ident(arr
+  .map(parseNumbers)
+  .filter(removeOdds))
   .reduce(average);
 ```
 
@@ -121,10 +127,10 @@ Developer consoles cannot accurately display the file name and line numbers for 
 
 `value (*)`: The value that will be logged and then returned.  
 `[options] (*|IdentOptions)`:  
-    `*`: Any value that will be logged preceding the `value` as a label.  
-    `IdentOptions`:  
-        `label (string)`: a value that will be logged preceding the `value` as a label.  
-        `lineNumber (boolean)`: a flag to indicate if the function should add the line number where the function is being called from to the label  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`*`: Any value that will be logged preceding the `value` as a label.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`IdentOptions (object)`:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`label (string)`: a value that will be logged preceding the `value` as a label.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`lineNumber (boolean)`: a flag to indicate if the function should add the line number where the function is being called from to the label  
 
 #### Example
 
@@ -149,7 +155,7 @@ const filterOptionsByInputText = ({
   );
 ```
 
-```js
+```jsx
 const SuggestionList = ({ options, filterText }) => (
   <ul>
     {options

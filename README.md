@@ -83,13 +83,6 @@ const user = JSON.parse(
 );
 ```
 
-<p align="center">
-    <p align="left">**With `console.log`:**</p>
-    <p align="right">**With `console.ident`:**</p>   
-    <img align="left" src="assets/carbon-log.svg" />
-    <img align="right" src="assets/carbon-ident.svg" />
-</p>
-
 ---
 
 **With `console.log`:**

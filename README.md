@@ -1,20 +1,20 @@
 <p align="center">
     <img
-        alt="consoleident"
+        alt="consoletap"
         src="assets/logo.svg"
         width="150px"
     />
 </p>
 <h3 align="center">
-    console.ident/logIdent
+    console.tap/logTap
 </h3>
 <p align="center">
     The console function Modern Javascript has been
     missing
 </p>
 <p align="center">
-    <a href="https://nodei.co/npm/console.ident/">
-        <img src="https://nodei.co/npm/console.ident.png" />
+    <a href="https://nodei.co/npm/console.tap/">
+        <img src="https://nodei.co/npm/console.tap.png" />
     </a>
 </p>
 
@@ -24,15 +24,15 @@
 v => (console.log(v), v);
 ```
 
-`logIndent` provides a logging function that does not interrupt your existing code. The function takes in a value, logs the value, then returns the value. 
+`logTap` provides a logging function that does not interrupt your existing code. The function takes in a value, logs the value, then returns the value. 
 
-In addition to the standalone `logIndent`, this module provides a polyfill that adds `logIndent` to the global `console` object as `console.ident`.  
+In addition to the standalone `logTap`, this module provides a polyfill that adds `logTap` to the global `console` object as `console.tap`.  
 
-I believe that `logIndent` **should** be a part of the standard, and as such I will be referring to it as `console.ident` going forward.
+I believe that `logTap` **should** be a part of the standard, and as such I will be referring to it as `console.tap` going forward.
 
 You can click [here to jump to the API](#API)
 
-You can view the slides and notes for my lighting talk proposing `console.ident` at [Ident Presentation](https://ident-presentation-qalclei0w.now.sh/?mode=presenter#0)
+You can view the slides and notes for my lighting talk proposing `console.tap` at [Tap Presentation](https://tap-presentation-qalclei0w.now.sh/?mode=presenter#0)
 
 ---
 
@@ -62,7 +62,7 @@ const result = arr
   .reduce(average);
 ```
 
-But there is no `console` function that fit in modern style Javascript. Instead `console.log` and it's like return `undefined`. Which means you will have to awkwardly break up the code to debug it. `console.ident` solves the `undefined` issue. It takes in a value, logs the value, then returns the value.
+But there is no `console` function that fit in modern style Javascript. Instead `console.log` and it's like return `undefined`. Which means you will have to awkwardly break up the code to debug it. `console.tap` solves the `undefined` issue. It takes in a value, logs the value, then returns the value.
 
 **For comparison:**
 
@@ -75,11 +75,11 @@ console.log(userStr);
 const userID = getUserId(JSON.parse(userStr));
 ```
 
-**With `console.ident`:**
+**With `console.tap`:**
 
 ```js
 const user = JSON.parse(
-  console.ident(localStorage.getItem("user"))
+  console.tap(localStorage.getItem("user"))
 );
 ```
 
@@ -101,13 +101,13 @@ const pickAndFormatData = ({ date, amount }) => {
 };
 ```
 
-**With `console.ident`:**
+**With `console.tap`:**
 
 ```js
 const pickAndFormatData = ({ date, amount }) =>
-  console.ident({
-    date: moment(console.ident(date)).format("DD/MM/YYY"),
-    amount: console.ident(Number(amount))
+  console.tap({
+    date: moment(console.tap(date)).format("DD/MM/YYY"),
+    amount: console.tap(Number(amount))
       ? formatCurrency(amount)
       : amount
   });
@@ -124,10 +124,10 @@ console.log(filtered);
 const result = filtered.reduce(average);
 ```
 
-**With `console.ident`:**
+**With `console.tap`:**
 
 ```js
-const result = console.ident(arr
+const result = console.tap(arr
   .map(parseNumbers)
   .filter(removeOdds))
   .reduce(average);
@@ -137,41 +137,41 @@ const result = console.ident(arr
 
 # API
 
-## `logIdent( value, [options] )`
+## `logTap( value, [options] )`
 
 Takes in a value, logs the value, then returns the value.
 
-Developer consoles cannot accurately display the file name and line numbers for `logIdent` calls since they pull that information based on where where the `console.log` is called. To make up for that `logIdent` takes an optional second parameter that serves as an identifying label for the call.
+Developer consoles cannot accurately display the file name and line numbers for `logTap` calls since they pull that information based on where where the `console.log` is called. To make up for that `logTap` takes an optional second parameter that serves as an tapifying label for the call.
 
 #### Arguments
 
 `value (*)`: The value that will be logged and then returned.  
-`[options] (*|IdentOptions)`:  
+`[options] (*|TapOptions)`:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`*`: Any value that will be logged preceding the `value` as a label.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`IdentOptions (object)`:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`TapOptions (object)`:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`label (string)`: a value that will be logged preceding the `value` as a label.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`lineNumber (boolean)`: a flag to indicate if the function should add the line number where the function is being called from to the label  
 
 #### Example
 
 ```js
-import { logIdent } from "console.ident";
+import { logTap } from "console.tap";
 
 fetch(url)
   .then(res => res.json)
-  .then(console.ident)
+  .then(console.tap)
   .then(dispatchRecivedData);
 ```
 
 ```js
-import { logIdent } from "console.ident";
+import { logTap } from "console.tap";
 
 const filterOptionsByInputText = ({
   options,
   filterText
 }) =>
   options.filter(value =>
-    logIdent(value.contains(filterText), value)
+    logTap(value.contains(filterText), value)
   );
 ```
 
@@ -180,7 +180,7 @@ const SuggestionList = ({ options, filterText }) => (
   <ul>
     {options
       .filter(value =>
-        logIdent(value.contains(filterText), {
+        logTap(value.contains(filterText), {
           label: `${filterText} ${value}`,
           lineNumber: true
         })
@@ -194,13 +194,13 @@ const SuggestionList = ({ options, filterText }) => (
 
 ## `polyfill()`
 
-When called, this function will add `logIdent` to the global `console` object as `console.ident`
+When called, this function will add `logTap` to the global `console` object as `console.tap`
 
 #### Example
 
 ```js
-import { polyfill } from "console.ident";
+import { polyfill } from "console.tap";
 polyfill();
 
-const value = console.ident("anything");
+const value = console.tap("anything");
 ```

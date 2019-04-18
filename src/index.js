@@ -1,22 +1,42 @@
-// Simple
-// console.ident = v => (console.log(v), v);
+"use strict";
+import ErrorStackParser from 'error-stack-parser';
 
 /**
  * @typedef {Object} IdentOptions
- * @property {string} [label] - a string to proceed the value being logged
+ * @property {string} [label]       - a string to proceed the value being logged
  * @property {boolean} [lineNumber] - a boolean indicating of the label should include the line number `ident` was called on
  */
-
-//  * @property {boolean} [fileName] - a boolean indicating of the label should include the name of the file `ident` was called in
 
 /**
  * This function uses Error().stack to pull the place to get the line number `logIdent` was called on
  * since the reported line number will be where `console.log` is called
- * @param {string} stack - the result of Error().stack
- * @returns {string} - line number where `ident` was called
+ *
+ * @returns {string} - file and line number where `tap` was called
  */
-const extractLineNumber = stack =>
-    /:(\d+)/.exec(stack.split('\n')[2])[0];
+const getLocation = () => {
+    const stack = ErrorStackParser.parse(new Error());
+    const { lineNumber, fileName } = stack[2];
+    return ` - ${fileName.replace(/^(.*?)([^\/]+)$/, '$2')}:${lineNumber}`;
+};
+
+/**
+ *
+ * @param logFuncName
+ * @returns {function(*, *=): *}
+ */
+const logTapPrep = (logFuncName = 'log') => (
+    value,
+    options = { label: '', location: true }
+) => {
+    const output = [
+        typeof options === 'string' ? options : options.label,
+        value,
+        options.location ? getLocation() : undefined
+    ].filter(v => v);
+
+    console[logFuncName](...output);
+    return value;
+};
 
 /**
  * Takes in a value, logs the value, then returns the value.
@@ -27,37 +47,25 @@ const extractLineNumber = stack =>
  * @param {IdentOptions} opt
  * @returns {T}
  */
-export const logIdent = (
-    v,
-    opt = { label: '', lineNumber: false, fileName: false }
-) => {
-    const label =
-        typeof opt === 'string'
-            ? opt
-            : `${opt.label}${
-                opt.lineNumber
-                    ? extractLineNumber(Error().stack)
-                    : ''
-                }`;
+export const logTap = logTapPrep();
 
-    navigator.userAgent.includes('Chrome')
-        ? console.log(
-            `%c${label}`,
-            'background:black;color:white;border-radius:5px;padding:1px',
-            v
-        )
-        : console.log(label, v);
+// logTap('test', 'label');
+// logTap('test', '');
+// logTap('test');
+// logTap('test', { label: 'l' });
 
-    return v;
-};
+const fullConsole = Object.entries(console).reduce((acc, [name, func]) => {
+    acc[name] = func;
+    Object.defineProperty(acc[name], 'tap', {
+        enumerable: false,
+        value: logTapPrep(name)
+    });
+    return acc;
+}, Object.defineProperty({}, 'tap', { enumerable: false, value: logTap }));
 
-export default Object.assign(
-    { ident: logIdent },
-    console // In case you don't want to use the polyfill form, but want all of the logging function as one object
-);
+export default fullConsole;
 
 /**
- * Ad the `ident` logging function to the global `console` object.
- * @returns {function(T, Object=): T}
+ * Add the `ident` logging function to the global `console` object.
  */
-export const polyfill = () => (console.ident = logIdent);
+export const polyfill = () =>  { console = fullConsole };

@@ -4,7 +4,7 @@
   "description": "The missing logging function for modern Javascript, v => ( console.log( v ), v )",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -36,10 +36,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "@pika/plugin-build-node": "^0.3.14",
     "@pika/plugin-build-types": "^0.3.14",
     "@pika/plugin-build-web": "^0.3.14",
-    "@pika/plugin-standard-pkg": "^0.3.14"
+    "@pika/plugin-standard-pkg": "^0.3.14",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1"
   },
   "dependencies": {
     "error-stack-parser": "^2.0.2"

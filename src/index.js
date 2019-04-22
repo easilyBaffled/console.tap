@@ -43,20 +43,14 @@ const logTapPrep = (logFuncName = 'log') => (
  * All of the `console` functions return `undefined`, meaning you have to rework expressive code to log something.
  * This function lets you log inline with all of your Expressions.
  *
- * @param {T} v
+ * @param {*} v
  * @param {IdentOptions} opt
- * @returns {T}
+ * @returns {*}
  */
 export const logTap = logTapPrep();
 
-// logTap('test', 'label');
-// logTap('test', '');
-// logTap('test');
-// logTap('test', { label: 'l' });
-
 const fullConsole = Object.entries(console).reduce((acc, [name, func]) => {
-    acc[name] = func;
-    Object.defineProperty(acc[name], 'tap', {
+    acc[name] = ( typeof func !== 'function' || func.tap )? func : Object.defineProperty(func, 'tap', {
         enumerable: false,
         value: logTapPrep(name)
     });
@@ -68,4 +62,4 @@ export default fullConsole;
 /**
  * Add the `ident` logging function to the global `console` object.
  */
-export const polyfill = () =>  { console = fullConsole };
+ const polyfill = () =>  { console = fullConsole };

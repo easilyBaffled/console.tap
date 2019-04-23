@@ -62,4 +62,4 @@ export default fullConsole;
 /**
  * Add the `ident` logging function to the global `console` object.
  */
- const polyfill = () =>  { console = fullConsole };
+export const polyfill = () =>  { console = fullConsole };

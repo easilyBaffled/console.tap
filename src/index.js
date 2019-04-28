@@ -62,4 +62,7 @@ export default fullConsole;
 /**
  * Add the `ident` logging function to the global `console` object.
  */
-export const polyfill = () =>  { console = fullConsole };
+export const polyfill = () =>  {
+    if ( console.hasOwnProperty("tap") )
+        console = fullConsole
+};

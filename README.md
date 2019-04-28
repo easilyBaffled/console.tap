@@ -6,11 +6,10 @@
     />
 </p>
 <h3 align="center">
-    console.tap/logTap
+    console.tap / logTap
 </h3>
 <p align="center">
-    The console function Modern Javascript has been
-    missing
+    Finally, a log function that won't interrupt your code. 
 </p>
 <p align="center">
     <a href="https://nodei.co/npm/console.tap/">
@@ -26,9 +25,11 @@ v => (console.log(v), v);
 
 `logTap` provides a logging function that does not interrupt your existing code. The function takes in a value, logs the value, then returns the value. 
 
-In addition to the standalone `logTap`, this module provides a polyfill that adds `logTap` to the global `console` object as `console.tap`.  
+In addition to the standalone `logTap` function, this module provides: 
+- a standalone copy of the `console` object that includes the `tap` along with an `tap` for each existing `console` function ( e.g. `console.warn.tap`, `console.error.tap` )  
+- a polyfill that replaces the regular console with the standalone copy
 
-I believe that `logTap` **should** be a part of the standard, and as such I will be referring to it as `console.tap` going forward.
+I believe that `logTap` **should** be a part of the standard spec, and as such I will be referring to it as `console.tap` going forward.
 
 You can click [here to jump to the API](#API)
 
@@ -38,7 +39,9 @@ You can view the slides and notes for my lighting talk proposing `console.tap` a
 
 # Why
 
-Javascript has become an Expression dominated language. Which means just about everything we do results in a value. Which in turn mean that we are able to write more concise code where one thing leads cleanly into the next.
+Javascript has become an [Expression](http://2ality.com/2012/09/expressions-vs-statements.html) dominated language. 
+Which means just about everything we do results in a value. 
+This allows us to write more concise code where one thing leads cleanly into the next.
 
 **For Example:**
 
@@ -62,7 +65,9 @@ const result = arr
   .reduce(average);
 ```
 
-But there is no `console` function that fit in modern style Javascript. Instead `console.log` and it's like return `undefined`. Which means you will have to awkwardly break up the code to debug it. `console.tap` solves the `undefined` issue. It takes in a value, logs the value, then returns the value.
+But there is no `console` function that fit in this modern style. Instead `console.log` and it's like return `undefined`. 
+Which means you will have to awkwardly break up the code to debug it. 
+`console.tap` solves the `undefined` issue. It takes in a value, logs the value, then returns the value.
 
 **For comparison:**
 
@@ -132,6 +137,15 @@ const result = console.tap(arr
   .filter(removeOdds))
   .reduce(average);
 ```
+---
+
+# Why `Tap`
+In functional programing `tap` is a function with the signature `(a → *) → a → a`. 
+It takes a function and a value, calls the function with the value, ignores the result and returns the value. 
+`console.tap` is `tap` with `console.log` baked in.
+Examples 
+- [Ramda](https://ramdajs.com/docs/#tap)  
+- [Lodash](https://lodash.com/docs/4.17.11#tap)
 
 ---
 
@@ -175,12 +189,19 @@ const filterOptionsByInputText = ({
   );
 ```
 
+## `Console`
+
+A standalone copy of the `console` object that includes the `tap` along with an `tap` for each existing `console` function ( e.g. `console.warn.tap`, `console.error.tap` )
+Each `console._.tap` works like the standard tap.
+
 ```jsx
+import cs from "console.tap";
+
 const SuggestionList = ({ options, filterText }) => (
   <ul>
     {options
       .filter(value =>
-        logTap(value.contains(filterText), {
+        cs.tap(value.contains(filterText), {
           label: `${filterText} ${value}`,
           lineNumber: true
         })
@@ -190,6 +211,18 @@ const SuggestionList = ({ options, filterText }) => (
       ))}
   </ul>
 );
+```
+
+```js
+import cs from "console.tap";
+
+try {
+    const user = JSON.parse(
+      console.group.tap(localStorage.getItem("user"))
+    );
+} catch ( e ) {
+    return console.error.tap( e )
+}
 ```
 
 ## `polyfill()`
@@ -203,4 +236,5 @@ import { polyfill } from "console.tap";
 polyfill();
 
 const value = console.tap("anything");
+const warning = console.warn.tap("anything");
 ```

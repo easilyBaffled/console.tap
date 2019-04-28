@@ -8,17 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/easilyBaffled/console.ident.git"
+    "url": "git+https://github.com/easilyBaffled/console.tap.git"
   },
   "keywords": [
-    "logging"
+    "console",
+    "logging",
+    "polyfill",
+    "ponyfill"
   ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/easilyBaffled/console.ident/issues"
+    "url": "https://github.com/easilyBaffled/console.tap/issues"
   },
-  "homepage": "https://github.com/easilyBaffled/console.ident#readme",
+  "homepage": "https://github.com/easilyBaffled/console.tap#readme",
   "@pika/pack": {
     "pipeline": [
       [
@@ -43,7 +46,8 @@
     "@pika/plugin-build-web": "^0.3.14",
     "@pika/plugin-standard-pkg": "^0.3.14",
     "babel-jest": "^24.7.1",
-    "jest": "^24.7.1"
+    "jest": "^24.7.1",
+    "test-console": "^1.1.0"
   },
   "dependencies": {
     "error-stack-parser": "^2.0.2"

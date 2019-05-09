@@ -33,7 +33,7 @@ I believe that `logTap` **should** be a part of the standard spec, and as such I
 
 You can click [here to jump to the API](#API)
 
-You can view the slides and notes for my lighting talk proposing `console.tap` at [Tap Presentation](https://tap-presentation-qalclei0w.now.sh/?mode=presenter#0)
+You can view the slides and notes for my lighting talk proposing `console.tap` at [Tap Talk Presentation](https://github.com/easilyBaffled/tap-talk)
 
 ---
 

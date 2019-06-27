@@ -1,6 +1,6 @@
 "use strict";
 import ErrorStackParser from 'error-stack-parser';
-
+import tapMacro from './macro'
 /**
  * @typedef {Object} IdentOptions
  * @property {string} [label]       - a string to proceed the value being logged
@@ -66,3 +66,5 @@ export const polyfill = () =>  {
     if ( console.hasOwnProperty("tap") )
         console = fullConsole
 };
+
+export const macro = tapMacro;

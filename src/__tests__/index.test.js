@@ -1,4 +1,8 @@
-import logger, { logTap, polyfill } from './index';
+import logger, { logTap, polyfill } from '..';
+const pluginTester = require("babel-plugin-tester");
+const plugin = require("babel-plugin-macros");
+const prettier = require("prettier");
+
 const originalConsole = console;
 
 const createProxyConsole = () => {
@@ -42,3 +46,26 @@ describe.each( [ logTap, logger.log.tap, logTap ] )( '%#', fn => {
         expect(actual).toEqual(expected);
     });
 } );
+
+
+
+pluginTester({
+    plugin,
+    snapshot: true,
+    babelOptions: {
+        filename: __filename,
+        retainLines: true,
+    },
+    formatResult(result) {
+        return prettier.format(result, { trailingComma: "es5" });
+    },
+    tests: {
+        "basic usage": `
+      import { macro } from "../index";
+      const result = macro(['1', '2', 'zero' , 3, 4, 5]
+        .map( n => Number(n) || 0 ))
+        .filter( n => n % 2)
+        .reduce(( acc, v ) => Math.max(acc, v));
+    `,
+    },
+});

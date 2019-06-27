@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`macros basic usage: basic usage 1`] = `
+"
+import { macro } from \\"../index\\";
+const result = macro(['1', '2', 'zero' , 3, 4, 5]
+  .map( n => Number(n) || 0 ))
+  .filter( n => n % 2)
+  .reduce(( acc, v ) => Math.max(acc, v));
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+var _index = require(\\"../index\\");
+const result = (0, _index.macro)(
+  [\\"1\\", \\"2\\", \\"zero\\", 3, 4, 5].map(n => Number(n) || 0)
+)
+  .filter(n => n % 2)
+  .reduce((acc, v) => Math.max(acc, v));
+
+"
+`;

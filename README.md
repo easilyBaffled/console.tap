@@ -19,15 +19,17 @@
 
 ---
 
+
 ```js
 v => (console.log(v), v);
 ```
 
 `logTap` provides a logging function that does not interrupt your existing code. The function takes in a value, logs the value, then returns the value. 
-
+---
 In addition to the standalone `logTap` function, this module provides: 
 - a standalone copy of the `console` object that includes the `tap` along with an `tap` for each existing `console` function ( e.g. `console.warn.tap`, `console.error.tap` )  
 - a polyfill that replaces the regular console with the standalone copy
+- a [babel macro](https://babeljs.io/blog/2017/09/11/zero-config-with-babel-macros) 
 
 I believe that `logTap` **should** be a part of the standard spec, and as such I will be referring to it as `console.tap` going forward.
 

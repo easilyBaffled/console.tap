@@ -1,6 +1,6 @@
 {
   "name": "console.tap",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "The missing logging function for modern Javascript, v => ( console.log( v ), v )",
   "main": "src/index.js",
   "scripts": {

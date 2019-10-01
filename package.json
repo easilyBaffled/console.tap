@@ -11,6 +11,7 @@
     "url": "git+https://github.com/easilyBaffled/console.tap.git"
   },
   "keywords": [
+    "babel-plugin-macros",
     "console",
     "logging",
     "polyfill",
@@ -42,14 +43,6 @@
       ],
       [
         "@pika/plugin-build-web",
-        {
-          "exclude": [
-            "__tests__/**/*"
-          ]
-        }
-      ],
-      [
-        "@pika/plugin-build-types",
         {
           "exclude": [
             "__tests__/**/*"

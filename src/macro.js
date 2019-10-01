@@ -73,6 +73,6 @@ function transformTapToLog(callExpressionPath) {
 
   const parensed = parenthesizedExpression(sequence);
   addComment(parensed, "leading", "prettier-ignore", false); // by adding the comment as trailing, it will appear right after the code and not on a new line and preserve the original code's lines
-  console.log(JSON.stringify(parensed))
-    callExpressionPath.replaceWith(parensed);
+
+  callExpressionPath.replaceWith(parensed);
 }

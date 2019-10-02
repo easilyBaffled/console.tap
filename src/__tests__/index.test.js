@@ -61,7 +61,7 @@ pluginTester({
     },
     tests: {
         "basic usage": `
-      import macro from "../macro";
+      import macro from "../tap.macro";
       const result = macro(['1', '2', 'zero' , 3, 4, 5]
         .map( n => Number(n) || 0 ))
         .filter( n => n % 2)

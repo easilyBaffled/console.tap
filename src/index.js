@@ -61,12 +61,3 @@ const fullConsole = Object.entries(console).reduce((acc, [name, func]) => {
 }, Object.defineProperty({}, "tap", { enumerable: false, value: tapMacro }));
 
 export default fullConsole;
-
-/**
- * Add the `ident` logging function to the global `console` object.
- */
-export const polyfill = () => {
-  if (console.hasOwnProperty("tap")) console = fullConsole;
-};
-
-export const macro = tapMacro;

@@ -57,6 +57,6 @@ const fullConsole = Object.entries(console).reduce((acc, [name, func]) => {
           value: logTapPrep(name)
         });
   return acc;
-}, Object.defineProperty({}, "tap", { enumerable: false, value: tapMacro }));
+}, Object.defineProperty({}, "tap", { enumerable: false, value: logTap }));
 
 export default fullConsole;

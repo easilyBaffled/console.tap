@@ -226,16 +226,14 @@ try {
     return console.error.tap( e )
 }
 ```
-
-## `polyfill()`
-
-When called, this function will add `logTap` to the global `console` object as `console.tap`
+---
+## Polyfill
+If you’d really like to embrace `tap`, you can use the polyfill by adding `import "console.tap/dist-src/polyfill.js”;` which will add `console.tap` and add `tap` options to each existing `console` function.
 
 #### Example
 
 ```js
-import { polyfill } from "console.tap";
-polyfill();
+import "console.tap/dist-src/polyfill.js";
 
 const value = console.tap("anything");
 const warning = console.warn.tap("anything");

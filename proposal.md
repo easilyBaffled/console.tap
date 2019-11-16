@@ -25,7 +25,7 @@ const groupBy = groupingPropName => (groups, obj) => ({
 const groupped = arr.reduce(groupBy('type'), {});
 ```
 
-`console.log`  does not *fit* in these examples. `console.log` is an [ExpressionStatement](https://astexplorer.net/#/gist/9a4032d251e731d16ef236cdee5af6d6/54387ab3f529ae7093f654e5085175991aa16561), it requires its own block. As a result, anyone writing in an expressive style has to rewrite their code to fit logging in. It is a cumbersome and tedious process. More than that, though, all of that writing and rewriting to make space for `log` introduces new opportunities for typos and errors. 
+`console.log`  does not *fit* in these examples. While `console.log` [is technically a CallExpression]([AST explorer]https://astexplorer.net/#/gist/6fa0ec9e42ef68f854fdecde72d1def8/dae159eaee59235de9d14109c9b8f95467d212b8) it is most often treated as a Statement because it returns `undefined`. As a result, anyone writing in an expressive style has to rewrite their code to accommodate for that result. It is a cumbersome and tedious process. More than that, though, all of that writing and rewriting introduces new opportunities for typos and errors. 
 
 # A Solution
 I want to propose a new `console` function. It takes in any number of values, logs all of the values, but *only* returns the first value. Something like:
@@ -37,7 +37,7 @@ I want to propose a new `console` function. It takes in any number of values, lo
 ``` 
 By doing this, the logging function could be used inline with just about any expression without requiring a rewrite. It would have no functional impact on the code around it. 
 
-For the examples, I am going to call the function `exp`.
+For the following examples I am going use this new function, and call it `console.exp`.
 
 # Use Cases
 ```javascript

@@ -4,7 +4,11 @@
   "description": "The missing logging function for modern Javascript, v => ( console.log( v ), v )",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "version": "npx @pika/pack"
+  },
+  "exports": {
+    "./polyfill": "./dist-src/polyfill.js"
   },
   "repository": {
     "type": "git",
@@ -54,20 +58,18 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "@pika/plugin-build-node": "^0.3.14",
-    "@pika/plugin-build-types": "^0.3.14",
-    "@pika/plugin-build-web": "^0.3.14",
-    "@pika/plugin-standard-pkg": "^0.3.14",
+    "@pika/plugin-build-node": "^0.8.1",
+    "@pika/plugin-build-types": "^0.8.1",
+    "@pika/plugin-build-web": "^0.8.1",
+    "@pika/plugin-standard-pkg": "^0.8.1",
     "babel-jest": "^24.7.1",
     "babel-plugin-test": "^1.0.3",
-    "babel-plugin-tester": "^6.4.0",
+    "babel-plugin-tester": "^8.0.0",
     "jest": "^24.7.1",
     "prettier": "^1.18.2",
     "test-console": "^1.1.0"
   },
   "dependencies": {
-    "@babel/types": "^7.4.4",
-    "babel-plugin-macros": "^2.6.1",
-    "error-stack-parser": "^2.0.2"
+    "@pika/pack": "^0.5.0"
   }
 }

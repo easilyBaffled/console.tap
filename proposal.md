@@ -40,6 +40,7 @@ By doing this, the logging function could be used inline with just about any exp
 For the following examples I am going use this new function, and call it `console.exp`.
 
 # Use Cases
+### In Function Composition
 ```javascript
 var userID = getUserId(
     JSON.parse(console.exp(localStorage.getItem( 'user' ))) 
@@ -59,6 +60,8 @@ var userID = getUserId(
 
 </details>
 
+---
+### Around Dot Chaining
 ```javascript
 const result = console.exp(['1', '2', 'zero' , 3, 4, 5]
     .map(parseNumbers)
@@ -80,6 +83,8 @@ const result = filteredRes
 
 </details>
 
+---
+### Pass through Promise.then
 ```javascript
 fetch(url)
     .then( res => res.json() )
@@ -98,6 +103,8 @@ fetch(url)
 
 </details>
 
+---
+### Returning an ObjectExpression
 ```javascript
 const pickAndFormatTransaction = ( {
         amount,

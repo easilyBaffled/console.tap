@@ -139,5 +139,5 @@ const pickAndFormatTransaction = ({ amount, date }) => {
 </details>
 
 # Additional Resources
-I have a more thorough post on Dev.To about this [Why (We) Make Room For `console.log`? - DEV Community 👩‍💻👨‍💻](https://dev.to/easilybaffled/why-we-make-room-for-console-log-2j52)
+I have a more thorough post on Dev.To about this [Why (We) Make Room For `console.log`?](https://dev.to/easilybaffled/why-we-make-room-for-console-log-2j52)
 And an [npm module](https://www.npmjs.com/package/console.tap), which includes a polyfill. 

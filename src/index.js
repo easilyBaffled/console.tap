@@ -14,7 +14,7 @@ import ErrorStackParser from "error-stack-parser";
  */
 const getLocation = () => {
   const stack = ErrorStackParser.parse(new Error());
-  const { lineNumber, fileName } = stack[2];
+  const { lineNumber, fileName } = (stack[2] || stack.slice(-1)[0] );
   return ` - ${fileName.replace(/^(.*?)([^\/]+)$/, "$2")}:${lineNumber}`;
 };
 

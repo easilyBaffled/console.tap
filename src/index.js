@@ -25,15 +25,10 @@ const getLocation = () => {
  */
 const logTapPrep = (logFuncName = "log") => (
   value,
-  options = { label: "", location: true }
+  ...args
 ) => {
-  const output = [
-    typeof options === "string" ? options : options.label,
-    value,
-    options.location ? getLocation() : undefined
-  ].filter(v => v);
 
-  console[logFuncName](...output);
+  console[logFuncName](value, ...args, getLocation());
   return value;
 };
 

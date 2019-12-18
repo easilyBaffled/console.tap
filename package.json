@@ -58,6 +58,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.8.1",
     "@pika/plugin-build-types": "^0.8.1",
     "@pika/plugin-build-web": "^0.8.1",
@@ -65,12 +66,11 @@
     "babel-jest": "^24.7.1",
     "babel-plugin-test": "^1.0.3",
     "babel-plugin-tester": "^8.0.0",
-    "error-stack-parser": "^2.0.4",
     "jest": "^24.7.1",
     "prettier": "^1.18.2",
     "test-console": "^1.1.0"
   },
   "dependencies": {
-    "@pika/pack": "^0.5.0"
+    "error-stack-parser": "^2.0.4"
   }
 }

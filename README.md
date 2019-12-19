@@ -19,17 +19,16 @@
 
 ---
 
-
 ```js
 v => (console.log(v), v);
 ```
 
 `logTap` provides a logging function that does not interrupt your existing code. The function takes in a value, logs the value, then returns the value. 
+
 ---
 In addition to the standalone `logTap` function, this module provides: 
 - a standalone copy of the `console` object that includes the `tap` along with an `tap` for each existing `console` function ( e.g. `console.warn.tap`, `console.error.tap` )  
-- a polyfill that replaces the regular console with the standalone copy
-- a [babel macro](https://babeljs.io/blog/2017/09/11/zero-config-with-babel-macros) 
+- a polyfill that replaces the regular console with the standalone copy 
 
 I believe that `logTap` **should** be a part of the standard spec, and as such I will be referring to it as `console.tap` going forward.
 
@@ -141,7 +140,7 @@ const result = console.tap(arr
 ```
 ---
 
-# Why `Tap`
+## Why "Tap" as the name? 
 In functional programing `tap` is a function with the signature `(a → *) → a → a`. 
 It takes a function and a value, calls the function with the value, ignores the result and returns the value. 
 `console.tap` is `tap` with `console.log` baked in.
@@ -153,20 +152,14 @@ Examples
 
 # API
 
-## `logTap( value, [options] )`
+## `logTap( value, ...additionalValues )`
 
-Takes in a value, logs the value, then returns the value.
-
-Developer consoles cannot accurately display the file name and line numbers for `logTap` calls since they pull that information based on where where the `console.log` is called. To make up for that `logTap` takes an optional second parameter that serves as an tapifying label for the call.
-
-#### Arguments
-
-`value (*)`: The value that will be logged and then returned.  
-`[options] (*|TapOptions)`:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`*`: Any value that will be logged preceding the `value` as a label.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`TapOptions (object)`:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`label (string)`: a value that will be logged preceding the `value` as a label.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`lineNumber (boolean)`: a flag to indicate if the function should add the line number where the function is being called from to the label  
+Takes in a value, logs the value, then returns the value. 
+Any other values passed into the function are logged but are not returned.
+The developer consoles cannot accurately display the file name and line numbers for `logTap` calls.
+This happens because  they pull that information based on where where the `console.log` is called. 
+To make up for this `logTap` passes the file and line number as the last value to the underlying `console.log` call. 
+ 
 
 #### Example
 
@@ -226,7 +219,7 @@ try {
     return console.error.tap( e )
 }
 ```
----
+
 ## Polyfill
 If you’d really like to embrace `tap`, you can use the polyfill by adding `import "console.tap/dist-src/polyfill.js”;` which will add `console.tap` and add `tap` options to each existing `console` function.
 
@@ -238,3 +231,9 @@ import "console.tap/dist-src/polyfill.js";
 const value = console.tap("anything");
 const warning = console.warn.tap("anything");
 ```
+---
+
+# Roadmap
+- [ ] Create a Babel plugin to convert `tap` to `log` with extra handling to fix the line number issue
+- [ ] Create a Babel plugin that can strip `tap` calls, leaving the fist value, for production builds
+- [ ] Create an ESLint rule that expands the existing `console` rules to include `tap` 

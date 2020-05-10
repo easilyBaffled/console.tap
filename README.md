@@ -169,7 +169,7 @@ import { logTap } from "console.tap";
 fetch(url)
   .then(res => res.json)
   .then(console.tap)
-  .then(dispatchRecivedData);
+  .then(dispatchReceivedData);
 ```
 
 ```js
@@ -186,7 +186,7 @@ const filterOptionsByInputText = ({
 
 ## `Console`
 
-A standalone copy of the `console` object that includes the `tap` along with an `tap` for each existing `console` function ( e.g. `console.warn.tap`, `console.error.tap` )
+A standalone copy of the `console` object that includes the `tap` along with an `tap` for each existing `console` function ( e.g. `console.warn.tap`, `console.error.tap`.)
 Each `console._.tap` works like the standard tap.
 This is offered as a [ponyfill](https://ponyfill.com) alternative to the polyfill. 
 ```jsx
